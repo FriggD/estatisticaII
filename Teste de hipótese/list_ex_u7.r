@@ -70,6 +70,8 @@ dp = 8
 a = 28
 dpa = 9
 
+# parece a primeira do teste <-|
+
 # var.test(x, y, ratio = 1,
 #          alternative = c("two.sided", "less", "greater"),
 #          conf.level = 0.95, …)
@@ -149,6 +151,9 @@ aX = 28
 mediaY = 521
 mediaX = 497
 
+library(BSDA)
+tsum.test(521,30,32,497,27,27,var.equal=F) # p-value = 0.002225
+
 # -----------------------------------------------------------------------------------------------
 
 # 8. Em uma amostra de 465 adultos que moram em uma área urbana, 377 disseram que usam a
@@ -162,6 +167,9 @@ internetU = 377
 aR = 305
 internetR = 119
 
+ 
+prop.test(c(377,119),c(465,305),conf.level=0.90, correct = F) #p-value < 2.2e-16
+
 # -----------------------------------------------------------------------------------------------
 
 # 9. Uma das maneiras de medir o grau de satisfação dos empregados de uma mesma categoria
@@ -174,3 +182,8 @@ a = 12
 b = 17
 dpA = 1100
 dpB = 1600
+
+# tsum.test(mean.x, s.x = NULL, n.x = NULL, mean.y = NULL, s.y = NULL,
+#   n.y = NULL, alternative = "two.sided", mu = 0, var.equal = FALSE,
+#   conf.level = 0.95)
+
