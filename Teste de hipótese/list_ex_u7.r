@@ -28,11 +28,23 @@ tsum.test(272,35,81,mu=290,conf.level=0.9)
 # concordar com a afirmação do reitor?
 # 21,8 18,6 12,6 17,9 16,4 20,4 23,6 19,1
 media = 22
+
 qtdade = 8
 horas = c(21.8, 18.6, 12.6, 17.9, 16.4, 20.4, 23.6, 19.1)
 
+# média
+mean(horas)
 
+# tsum.test(mean.x, s.x = NULL, n.x = NULL, mean.y = NULL, s.y = NULL,
+#   n.y = NULL, alternative = "two.sided", mu = 0, var.equal = FALSE,
+#   conf.level = 0.95)
 
+# desvio padrão
+sd(horas, na.rm=FALSE)
+
+tsum.test(18.8,s.x=3.37,n.x=8,mu=22)
+
+# p-value = 0.03128
 
 # -----------------------------------------------------------------------------------------------
 
@@ -42,8 +54,8 @@ horas = c(21.8, 18.6, 12.6, 17.9, 16.4, 20.4, 23.6, 19.1)
 # mais propensos a comprarem um produto quando há amostras grátis?
 
 a = 80
-maisP = 48
-rejeitar = 52
+maisP = 0.48
+rejeitar = 0.52
 
 # -----------------------------------------------------------------------------------------------
 

@@ -128,7 +128,7 @@ qt(0.025,4)
 # conjunto de dados grande demais
 
 library(BSDA)
-z.test(a,b,altyernative = "g", sugma.x=250, sigma.y=300)
+z.test(a,b,altyernative = "g", sigma.x=250, sigma.y=300)
 
 # p-valor 0,009527 < alfa
 # rejeita H0
