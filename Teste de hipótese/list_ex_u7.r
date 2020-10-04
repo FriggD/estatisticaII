@@ -41,7 +41,7 @@ mean(horas)
 
 # desvio padrão
 sd(horas, na.rm=FALSE)
-
+sigma.test(horas)
 tsum.test(18.8,s.x=3.37,n.x=8,mu=22)
 
 # p-value = 0.03128
@@ -57,6 +57,7 @@ a = 80
 maisP = 0.48
 rejeitar = 0.52
 
+
 # -----------------------------------------------------------------------------------------------
 
 # 4. Um representante de um hospital afirma que o desvio padrão do tempo de espera que os
@@ -65,8 +66,24 @@ rejeitar = 0.52
 # pode rejeitar a afirmação do representante do hospital? E se testar com = 10%?
 
 dp = 8
+
 a = 28
 dpa = 9
+
+# var.test(x, y, ratio = 1,
+#          alternative = c("two.sided", "less", "greater"),
+#          conf.level = 0.95, …)
+
+# não tenho vetores nem grau de liberdade
+fi = qf(0.025,27,27) # 0.4627607
+fs = qf(0.025,27,27,lower.tail=F) # 2.160944
+
+li = 64/fs*81
+ls = 64/fi*81
+
+F=64/81
+F
+
 
 # -----------------------------------------------------------------------------------------------
 
@@ -88,6 +105,12 @@ dpA = 12.5
 mediaB = 85
 dpB = 19
 
+library(BSDA)
+# tsum.test(media1, sigma1, qtdade1, media2, sigma2, qtdade2, var.equal=T/F, conf.level=0.95)
+tsum.test(90,12.5,41,85,19,61,var.equal=F)
+# p-value = 0.1415
+
+
 # -----------------------------------------------------------------------------------------------
 
 # 6. Uma associação de restaurantes diz que famílias nos Estados Unidos chefiadas por pessoas
@@ -101,9 +124,13 @@ dpB = 19
 a25 = 40
 media25 = 2115
 dp25 = 103
+
 a55 = 47
 media55 = 2798
 dp55 = 107
+
+library(BSDA)
+tsum.test(2115,103,40,2798,107,47,var.equal=F) #p-value < 2.2e-16
 
 # -----------------------------------------------------------------------------------------------
 
