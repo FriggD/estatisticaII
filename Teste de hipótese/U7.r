@@ -2,14 +2,24 @@
  
 # Não é possível chegar a uma conclusão.
 # A variância encontrada na amostra é estatisticamente menor que a afirmada pela empresa.
-# A afirmação da empresa pode ser considerada verdadeira, com 95% de confiança.
+# [x] A afirmação da empresa pode ser considerada verdadeira, com 95% de confiança.
 # A afirmação da empresa é falsa.
+
+# H0: var = 4
+# H1: var < 4
 
 var = 4
 
 a = 28
 varA = 3.2
 
+x2=(27*3.2)/4
+x2 #21.6
+
+qchisq(0.95,27)
+#  40.11327 > 21.6
+pchisq(x2,27)
+#  0.2425847 > 0,05
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -163,3 +173,8 @@ zsum.test(mA,sa,ta,mB,sb,tb, conf.level = 0.04)
 # O diretor está correto em sua afirmação.
 # A média alcançada pelos alunos é estatisticamente maior que 287
 # A afirmação do diretor é falsa.
+
+a=85
+media=292
+dp=35
+mediaEsperada > 292  

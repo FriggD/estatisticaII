@@ -15,9 +15,14 @@ conf = 0.9
 #   conf.level = 0.95)
 
 library(BSDA)
-tsum.test(272,35,81,mu=290,conf.level=0.9)
+# tsum.test(272,35,81,mu=290,conf.level=0.9)
 
-# p-value = 1.402e-05
+# amostra grande -> teste Z
+
+zsum.test(272,35,81,alternative = "l",mu=290,conf.level=0.9)
+# p-value = 3.682e-06
+
+# 272 não é igual 290
 
 # -----------------------------------------------------------------------------------------------
 
@@ -50,12 +55,27 @@ tsum.test(18.8,s.x=3.37,n.x=8,mu=22)
 
 # 3. Você entrevista uma amostra aleatória de 80 adultos. Os resultados da sua pesquisa
 # mostram que 48% deles disseram que são mais propensos a comprarem um produto quando
-# há amostra grátis. Com você pode rejeitar a afirmação de que no mínimo 52% dos adultos são
+# há amostra grátis. Com alfa = 0,05 você pode rejeitar a afirmação de que no mínimo 52% dos adultos são
 # mais propensos a comprarem um produto quando há amostras grátis?
 
 a = 80
 maisP = 0.48
 rejeitar = 0.52
+
+# H0: 0.48 = 0.52
+# H0: 0.48 < 0.52 
+
+# uma população
+x=80*0.48 # número de pessoas que disse sim
+prop.test(x,80,0.52,alternative="less")
+# prop.test(número de pessoas que disse "sim", quantidade total, valor que quero comparar, alternativa no mínimo)
+
+
+# p-value = 0.2728
+# maior que o nivel de significancia 
+# aceita H0
+# estatisticamente igual
+
 
 
 # -----------------------------------------------------------------------------------------------
@@ -70,22 +90,29 @@ dp = 8
 a = 28
 dpa = 9
 
-# parece a primeira do teste <-|
+# H0: var = 64
+# H1: var > 64
+#  *TESTE PARA UMAVARIANCIA*
+# = ((tamanho da amostra - 1)*variancia1)/variancia2
+x1 = (27*9^2)/(8^2)
+x1
 
-# var.test(x, y, ratio = 1,
-#          alternative = c("two.sided", "less", "greater"),
-#          conf.level = 0.95, …)
+qchisq(0.95,27)
+# não rejeita H0
 
-# não tenho vetores nem grau de liberdade
-fi = qf(0.025,27,27) # 0.4627607
-fs = qf(0.025,27,27,lower.tail=F) # 2.160944
+# compara o valor do qchisq() = 40.11, com o valor de x1 = 34.1718, se qchisq for maior, não rejeita H0, não entrou na região de rejeição
 
-li = 64/fs*81
-ls = 64/fi*81
+qchisq(0.90,27)
+# ainda não entrou na região de rejeição
+# Aceita H0
 
-F=64/81
-F
+pchisq(x1,27,lower.tail = F)
+# pchisq(limite que eu quero, grau de liberdade, lower.tail = F)
+# lower.tail = F por que foi colocado maior no h1
+# 0.1611077 > 0.05
+# continua com H0
 
+# desvio padrão de 9min, nesse caso, é estatisticamente igual à desvio padrão de 8min
 
 # -----------------------------------------------------------------------------------------------
 
@@ -182,8 +209,31 @@ a = 12
 b = 17
 dpA = 1100
 dpB = 1600
+varA = 1100^2
+varB= 1600^2
 
-# tsum.test(mean.x, s.x = NULL, n.x = NULL, mean.y = NULL, s.y = NULL,
-#   n.y = NULL, alternative = "two.sided", mu = 0, var.equal = FALSE,
-#   conf.level = 0.95)
+
+# duas populações
+# H0 : Va = Vb
+# H1: Va < Vb
+
+Fcal = varA/varB
+Fcal
+
+qf(0.05,11,16)
+# saí da região de rejeição
+# aceita H0
+
+pf(Fcal,11,16)
+# 0,10 é maior que alfa
+
+
+# ------------------------------------
+# H0 : Va = Vb
+# H1: Vb < Va
+
+Fcal=varB/varA
+qf(0.05,16,11, lower.tail=F)
+pf(Fcal,16,11, lower.tail = F)
+
 
