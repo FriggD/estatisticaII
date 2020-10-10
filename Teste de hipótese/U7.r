@@ -30,10 +30,15 @@ pchisq(x2,27)
 # Com 93% de confiança, pode-se afirmar que as duas proporções são diferentes.
 # Com 7% de confiança, pode-se afirmar que as duas proporções são diferentes.
 
-# prop.test(total de sucesso, total, proporção que eu quero comparar, "two.sided", "less", "greater", conf level)
-prop.test(299,1112,0.25,conf.level=0.93, correct = F)
+# H0: 25% = 299
+# H1: 25% <> 299
 
-# p-value = 0.1557 > 0.07
+# prop.test(total de sucesso, total, proporção que eu quero comparar, "two.sided", "less", "greater", conf level)
+prop.test(299,1112,0.25, alternative = "two.sided",conf.level=0.93, correct = F) # p-value = 0.1459 > 0.07
+prop.test(299,1112,0.25, alternative = "g",conf.level=0.93, correct = F) # p-value = 0.07293
+prop.test(299,1112,0.25, alternative = "l",conf.level=0.93, correct = F) #  p-value = 0.9271
+
+
 # aceita H0
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,17 +60,15 @@ dp = 0.42
 #   conf.level = 0.95)
 
 library(BSDA)
-tsum.test(1.86, 0.42, 12, mu=1.5, conf.level=0.95)
-# p-value = 0.01276 < 0,05
+tsum.test(1.86, 0.42, 12, mu=1.5, alternative ="g",conf.level=0.95)
+# p-value = 0.006381 < 0,05
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
 # Deseja-se comparar dois analistas quanto à precisão (variabilidade) na análise de uma certa substância que contém carbono. O analista A é experiente, e o B é novo no serviço, sendo portanto, de experiência desconhecida. O analista A, analisou 15 amostras e apresentou uma variância de 1,75, já o analista B verificou 17 amostras e obteve variância igual a 5,49. Com 95% de confiança, aplique um teste de hipóteses para verificar se o analista B possui variância maior nas suas análises e em seguida marque as alternativas corretas. *
  
-#  ???
-
-# O analista A é mais preciso que o analista B.
+# [x]O analista A é mais preciso que o analista B.
 # Os dois analistas têm a mesma precisão.
 # O analista B é mais preciso que o analista A.
 # Não é possível fazer essa verificação.
@@ -81,15 +84,17 @@ vB=5.49
 # primeiro calcula a divisão das variancias para o Teste F
 
 # F =  vB/vA
-F = vA/vB
-F
+F = vB/vA
+F # 3.137143
 # aplica o qf ou pf
 pf(F,16,14,lower.tail = F)
 pf(F,16,14)
+#  0.9813435 
+
 
 qf(0.05,16,14,lower.tail = F)
 qf(0.05,16,14)
-
+# 0.421351
 # ####
 
 pf(F,14,16,lower.tail = F)
@@ -103,10 +108,13 @@ qf(0.05,14,16)
 
 # A variabilidade no levantamento de impurezas de uma certa substância depende da duração do processo usado. Um químico utiliza dois processo, A e B. Ele melhorou o processo B, esperando com isso reduzir a variabilidade na medição das impurezas. Levantaram-se duas amostras, uma utilizando o processo A e outra o processo B, de tamanhos 21 e 13, respectivamente, obtendo-se S²A = 1,04 e S²B = 0,51. Aplique um teste de hipóteses adequado e em seguida marque as alternativas que achar corretas. Adote alfa de 5%. *
  
-# A melhoria feita no processo B realmente reduziu a variabilidade na medição.
+# [x] A melhoria feita no processo B realmente reduziu a variabilidade na medição.
 # A melhoria feita no processo B não reduziu a variabilidade na medição.
 # estatística do teste = 6,72
 # limite da região de rejeição = 2,28
+
+# H0: pA = pB
+# H1: pA > pB
 
 a=21
 b=13
@@ -130,7 +138,9 @@ pf(Fcal, 20,12)
 # H1: p1 < p2
 # H1: p1 > p2
 
-prop.test(c(70,50),c(200,200),conf.level=0.90, correct = F)
+prop.test(c(70,50),c(200,200),alternative="two.sided", correct = F) # p-value = 0.03817
+prop.test(c(70,50),c(200,200),alternative="g", correct = F) # p-value = 0.01908
+prop.test(c(70,50),c(200,200),alternative="l", correct = F) # p-value = 0.9809
 # p-value = 0.03817
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
@@ -140,21 +150,22 @@ prop.test(c(70,50),c(200,200),conf.level=0.90, correct = F)
 # Estatística do teste = -8,09
 # As duas proporções podem ser consideradas iguais.
 # Devemos aceitar H0.
-# A proporção de rejeição do processo 1 não pode ser considerada igual a do processo 2.
+# [x] A proporção de rejeição do processo 1 não pode ser considerada igual a do processo 2.
 
 a1=1000
 rej1=50
 a2=1050
 rej2=210
 
-prop.test(c(50,210),c(1000,1050),conf.level=0.95, correct = F)
+prop.test(c(50,210),c(1000,1050),alternative="g",conf.level=0.95, correct = F)
+prop.test(c(50,210),c(1000,1050),alternative="l",conf.level=0.95, correct = F)
 # p-value < 2.2e-16
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
 # Um supermercado não sabe se deve comprar lâmpadas da marca A ou B, de mesmo preço. Retirou-se uma amostra de 121 lâmpadas, de cada marca, obtendo os dados abaixo, em horas de funcionamento até queimar. Considere que um teste já foi aplicado e temos o resultado de que as variâncias das duas amostras podem ser consideradas diferentes. Aplique o teste de hipóteses adequado par verificar se a durabilidade média da marca A é menor que a de B, em seguida marque apenas as alternativas corretas. Use alfa de 5%. *
  
 # Imagem sem legenda
-# A durabilidade da marca A é estatisticamente menor que a marca B.
+# [x] A durabilidade da marca A é estatisticamente menor que a marca B.
 # Estatística do teste = 1,6577
 # Deve-se aceitar H0.
 # A durabilidade das duas médias é a mesma.
@@ -170,6 +181,7 @@ dpB=80
 library(BSDA)
 # média, dp,amostra
 
+zsum.test(mediaA,dpA,a,mediaB,dpB,b,alternative="l")
 
 # tsum.test(mediaA,dpA,a,mediaB,dpA,b,var.equal=F)
 # p-value < 2.2e-16
@@ -181,7 +193,7 @@ library(BSDA)
 # Não é possível chegar a nenhuma conclusão.
 # A durabilidade média das duas marcas de pneus pode ser considerada igual.
 # Deve-se aceitar H0.
-# A durabilidade média das duas marcas de pneus podem ser consideradas diferentes.
+# [x] A durabilidade média das duas marcas de pneus podem ser consideradas diferentes.
 
 sa=2700
 sb=2000
@@ -207,7 +219,11 @@ zsum.test(mA,sa,ta,mB,sb,tb)
 a=85
 media=292
 dp=35
-mediaEsperada > 292  
+mediaEsperada > 287  
 
-zsum.test(292,35,85,alternative = "l",mu=287,conf.level=0.96)
-# p-value = 0.9061
+# H0: media = mediaEsperada
+# H1: media > 287
+
+
+zsum.test(292,35,85,alternative = "greater",mu=287,conf.level=0.96)
+# p-value = 0.09391

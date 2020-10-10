@@ -24,6 +24,7 @@ zsum.test(272,35,81,alternative = "l",mu=290,conf.level=0.9)
 
 # 272 não é igual 290
 
+# alternative: two-sided => diferente
 # -----------------------------------------------------------------------------------------------
 
 # 2. O reitor de uma universidade estima que o número médio de aulas dadas por professores de
@@ -59,7 +60,7 @@ tsum.test(18.8,s.x=3.37,n.x=8,mu=22)
 # mais propensos a comprarem um produto quando há amostras grátis?
 
 a = 80
-maisP = 0.48
+maisPropenso = 0.48
 rejeitar = 0.52
 
 # H0: 0.48 = 0.52
@@ -68,15 +69,17 @@ rejeitar = 0.52
 # uma população
 x=80*0.48 # número de pessoas que disse sim
 prop.test(x,80,0.52,alternative="less")
-# prop.test(número de pessoas que disse "sim", quantidade total, valor que quero comparar, alternativa no mínimo)
+# prop.test(Contagem, total, valor que quero comparar, alternative)
 
+# não adianta comparar se 0.48 é maior que 0.52. Se numericamente eles nao são iguais, não vai ser estatisticamente que eles vão ser
 
 # p-value = 0.2728
 # maior que o nivel de significancia 
 # aceita H0
 # estatisticamente igual
 
-
+# Não se pode rejeitar a afirmação de que no mínimo 52% dos adultos são
+# mais propensos a comprarem um produto quando há amostras grátis
 
 # -----------------------------------------------------------------------------------------------
 
@@ -93,7 +96,7 @@ dpa = 9
 # H0: var = 64
 # H1: var > 64
 #  *TESTE PARA UMAVARIANCIA*
-# = ((tamanho da amostra - 1)*variancia1)/variancia2
+# = ((tamanho da amostra - 1)*variancia da amostra)/variancia de H0
 x1 = (27*9^2)/(8^2)
 x1
 
@@ -207,8 +210,10 @@ prop.test(c(377,119),c(465,305),conf.level=0.90, correct = F) #p-value < 2.2e-16
 
 a = 12
 b = 17
+
 dpA = 1100
 dpB = 1600
+
 varA = 1100^2
 varB= 1600^2
 
@@ -234,10 +239,13 @@ pf(Fcal,11,16)
 
 # ------------------------------------
 # H0 : Va = Vb
-# H1: Vb < Va
+# H1: Vb > Va
 
 Fcal=varB/varA
+Fcal
 qf(0.05,16,11, lower.tail=F)
-pf(Fcal,16,11, lower.tail = F)
+# qf(0.95,16,11)
 
+pf(Fcal,16,11, lower.tail = F)
+# 0.8944126 > 10%
 
