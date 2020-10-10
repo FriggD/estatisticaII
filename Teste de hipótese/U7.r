@@ -213,7 +213,7 @@ zsum.test(mA,sa,ta,mB,sb,tb)
 
 # A média dos 85 alunos é estatisticamente menor que 287.
 # O diretor está correto em sua afirmação.
-# A média alcançada pelos alunos é estatisticamente maior que 287
+# [x] A média alcançada pelos alunos é estatisticamente maior que 287
 # A afirmação do diretor é falsa.
 
 a=85
