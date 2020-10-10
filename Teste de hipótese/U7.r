@@ -208,3 +208,6 @@ a=85
 media=292
 dp=35
 mediaEsperada > 292  
+
+zsum.test(292,35,85,alternative = "l",mu=287,conf.level=0.96)
+# p-value = 0.9061
