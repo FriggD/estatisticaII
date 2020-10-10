@@ -223,7 +223,7 @@ varB= 1600^2
 
 Fcal = varA/varB
 Fcal
-
+# 0.4726562
 qf(0.05,11,16)
 # saí da região de rejeição
 # aceita H0

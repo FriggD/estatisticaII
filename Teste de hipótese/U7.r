@@ -40,7 +40,7 @@ prop.test(299,1112,0.25,conf.level=0.93, correct = F)
 
 # Um ambientalista estima que a média de lixo reciclado por adultos nos Estados Unidos seja maior que 1,5 libras por pessoa por dia. Você quer testar essa afirmação. Você descobre que a média de lixo reciclado por pessoa ao dia em uma amostra aleatória de 12 adultos nos EUA é de 1,86 libras e o desvio padrão é 0,42 libras. Com alfa de 5%, é possível afirmar que o peso médio de lixo reciclado seja maior que 1,5 libras? *
  
-# Com 90% de confiança é possível afirmar que a média de lixo reciclado é maior que 1,5 libras.
+# [x] Com 90% de confiança é possível afirmar que a média de lixo reciclado é maior que 1,5 libras.
 # A média de lixo reciclado é estatisticamente igual a 1,5 libras.
 # Com 95% de confiança, 1,86 libras pode ser considerado estatisticamente maior que 1,5 libras.
 # Não é possível verificar essa afirmação.
@@ -55,8 +55,8 @@ dp = 0.42
 #   conf.level = 0.95)
 
 library(BSDA)
-tsum.test(1.86, 0.42, 12, mu=1.5)
-# p-value = 0.01276
+tsum.test(1.86, 0.42, 12, mu=1.5, conf.level=0.95)
+# p-value = 0.01276 < 0,05
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,8 +113,12 @@ b=13
 varA=1.04
 varB=0.51
 
-
-
+Fcal = varA/varB
+Fcal
+qf(0.05,20,12)
+#  0.4390624
+pf(Fcal, 20,12)
+# 0.8968978
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -187,7 +191,9 @@ mA=22000
 mB=20000
 
 library(BSDA)
-zsum.test(mA,sa,ta,mB,sb,tb, conf.level = 0.04)
+zsum.test(mA,sa,ta,mB,sb,tb)
+# p-value = 5.483e-05
+
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
