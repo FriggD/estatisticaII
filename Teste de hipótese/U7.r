@@ -25,7 +25,7 @@ pchisq(x2,27)
 
 # Um pesquisador declara que 25% dos adultos nos Estados Unidos têm medo de voar. Você quer testar essa afirmação. Você descobre que, em uma amostra aleatória de 1112 adultos nos Estados Unidos, 299 têm medo de voar. Com alfa de 7%, qual a sua conclusão sobre isso? *
  
-# Com 93% de confiança, pode-se afirmar que as duas proporções são iguais.
+# [x] Com 93% de confiança, pode-se afirmar que as duas proporções são iguais.
 # Não é possível chegar a nenhuma conclusão.
 # Com 93% de confiança, pode-se afirmar que as duas proporções são diferentes.
 # Com 7% de confiança, pode-se afirmar que as duas proporções são diferentes.
@@ -33,7 +33,8 @@ pchisq(x2,27)
 # prop.test(total de sucesso, total, proporção que eu quero comparar, "two.sided", "less", "greater", conf level)
 prop.test(299,1112,0.25,conf.level=0.93, correct = F)
 
-# p-value = 0.1557
+# p-value = 0.1557 > 0.07
+# aceita H0
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -62,6 +63,8 @@ tsum.test(1.86, 0.42, 12, mu=1.5)
 
 # Deseja-se comparar dois analistas quanto à precisão (variabilidade) na análise de uma certa substância que contém carbono. O analista A é experiente, e o B é novo no serviço, sendo portanto, de experiência desconhecida. O analista A, analisou 15 amostras e apresentou uma variância de 1,75, já o analista B verificou 17 amostras e obteve variância igual a 5,49. Com 95% de confiança, aplique um teste de hipóteses para verificar se o analista B possui variância maior nas suas análises e em seguida marque as alternativas corretas. *
  
+#  ???
+
 # O analista A é mais preciso que o analista B.
 # Os dois analistas têm a mesma precisão.
 # O analista B é mais preciso que o analista A.
@@ -72,14 +75,28 @@ nB=17
 vA=1.75
 vB=5.49
 
-fi=qf(0.05,14,16)
-fs=qf(0.05,14,16,lower.tail = F)
+# H0: vA = Vb
+# H1: vB > vA
 
-li=(1.75)/(fs*5.49)
-ls=((1.75)/(fi*5.49))
+# primeiro calcula a divisão das variancias para o Teste F
 
-qchisq(0.5,nA,lower.tail = F)
+# F =  vB/vA
+F = vA/vB
+F
+# aplica o qf ou pf
+pf(F,16,14,lower.tail = F)
+pf(F,16,14)
 
+qf(0.05,16,14,lower.tail = F)
+qf(0.05,16,14)
+
+# ####
+
+pf(F,14,16,lower.tail = F)
+pf(F,14,16)
+
+qf(0.05,14,16,lower.tail = F)
+qf(0.05,14,16)
 
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
@@ -95,6 +112,9 @@ a=21
 b=13
 varA=1.04
 varB=0.51
+
+
+
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -138,12 +158,16 @@ prop.test(c(50,210),c(1000,1050),conf.level=0.95, correct = F)
 a=121
 mediaA=1360
 dpA=70
+
 b=121
 mediaB=1440
 dpB=80
 
 library(BSDA)
-tsum.test(mediaA,dpA,a,mediaB,dpA,b,var.equal=F)
+# média, dp,amostra
+
+
+# tsum.test(mediaA,dpA,a,mediaB,dpA,b,var.equal=F)
 # p-value < 2.2e-16
 
 #-------------------------------------------------------------------------------------------------------------------------------------------

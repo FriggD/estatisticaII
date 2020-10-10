@@ -212,9 +212,13 @@ dpB = 1600
 varA = 1100^2
 varB= 1600^2
 
+# Teste F: Divisão de variancias
+# Variancias iguais: estatística do teste = 1
+# Maior/menor > 1
+# Menor/maior < 1 
 
 # duas populações
-# H0 : Va = Vb
+# H0 : Va = Vb                      (H0 é sempre igual)
 # H1: Va < Vb
 
 Fcal = varA/varB
